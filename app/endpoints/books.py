@@ -2,32 +2,14 @@ from fastapi import APIRouter
 
 router = APIRouter()
 
+books = [
+    {"id": 1, "title": "book 1", "price": 16.99},
+    {"id": 2, "title": "book 2", "price": 12.99},
+    {"id": 3, "title": "book 3", "price": 9.99},
+]
+
 
 @router.get("/")
 def get_books():
     """Get books from database"""
-    return {"data": "books"}
-
-
-@router.post("/")
-def add_book():
-    """Create new book and store in database"""
-    return {"data": "new book"}
-
-
-@router.get("/{book_id}")
-def get_book_by_id(book_id):
-    """Get single book from database"""
-    return {"data": "book"}
-
-
-@router.put("/{book_id}")
-def update_book(book_id):
-    """Update book in database"""
-    return {"data": "updated book"}
-
-
-@router.delete("/{book_id}")
-def delete_book(book_id):
-    """Delete book from database"""
-    return {}
+    return books
