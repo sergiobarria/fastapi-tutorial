@@ -10,6 +10,39 @@ books = [
 
 
 @router.get("/")
-def get_books():
+def get_books(limit: int = 1, skip: int = 0):
     """Get books from database"""
+    response = books[skip : skip + limit]
+    return response
+
+
+@router.post("/")
+def add_book(new_book):
+    """Create new book and store in database"""
+    books.append(new_book)
+
+    return books
+
+
+@router.get("/{book_id}")
+def get_book_by_id(book_id: int):
+    """Get single book from database"""
+    for book in books:
+        if book["id"] == book_id:
+            return book
+
+
+@router.put("/{book_id}")
+def update_book(book_id: int):
+    """Update book in database"""
+    return {"data": "updated book"}
+
+
+@router.delete("/{book_id}")
+def delete_book(book_id: int):
+    """Delete book from database"""
+    for book in books:
+        if book["id"] == book_id:
+            books.pop(book_id - 1)
+
     return books
