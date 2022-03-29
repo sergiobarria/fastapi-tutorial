@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from fastapi.encoders import jsonable_encoder
 
 router = APIRouter()
 
@@ -33,9 +34,12 @@ def get_book_by_id(book_id: int):
 
 
 @router.put("/{book_id}")
-def update_book(book_id: int):
+def update_book(book_id: int, book):
     """Update book in database"""
-    return {"data": "updated book"}
+    update_book_encoded = jsonable_encoder(book)
+    books[book_id] = update_book_encoded
+
+    return update_book_encoded
 
 
 @router.delete("/{book_id}")
